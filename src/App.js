@@ -22,7 +22,7 @@ class App extends Component {
             <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
           </div>
         </Navbar>
-        <Menu dishes={this.state.dishes}/>
+        <Menu dishes={this.state.dishes}/> {/* this dishes variable will be used int MenuComponents.js line 45 in const menu = this.props.dishes.map()  */}
       </div>
     );
   }
