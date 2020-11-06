@@ -20,19 +20,6 @@ class Menu extends Component {
     onDishSelect(dish) {
         this.setState({selectedDish: dish}); /* establishes that a dish was selected */ 
     }
-    
-    renderDish(dish) { 
-        if(dish != null) { /* if there is a selected dish, then it will render */ 
-            return (
-                    <DishDetail detailDish={dish} />
-            );
-        } 
-        else {
-            return (
-                <div></div>
-            );
-        }
-    }
 
     render() {
         //this prints in browser repeated food images with overlayed text
@@ -57,8 +44,10 @@ class Menu extends Component {
                 <div className="row">
                     {menu} {/* this shows dish images with overlayed text*/}
                 </div>
-                <div className="row"> 
-                    {this.renderDish(this.state.selectedDish)} {/* this shows in browser the image + description */}
+                <div> 
+                    <DishDetail detailDish={this.state.selectedDish} /> {/* saves selected dish to DishDetail props */}
+
+                    {/* {this.renderDish(this.state.selectedDish)} this shows in browser the image + description */}
                 </div>
             </div>
         );
