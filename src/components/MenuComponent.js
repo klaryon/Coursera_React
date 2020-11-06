@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
 import DishDetail from "./DishdetailComponent"
 
 class Menu extends Component {
@@ -23,7 +23,7 @@ class Menu extends Component {
 
     render() {
         //this prints in browser repeated food images with overlayed text
-        const menu = this.props.dishes.map((dish) => { {/* we change this.props, because dishes have been stated in App.js and delivered here with props */}
+        const menu = this.props.dishes.map((dish) => { /* we change this.props, because dishes have been stated in App.js and delivered here with props */
             return (
                 <div key={dish.id} className="col-12 col-md-5 m-1">
                     <Card onClick={() => this.onDishSelect(dish)}> {/* if we make click on one image, a dish is added .onDishSelect  */}
@@ -44,11 +44,7 @@ class Menu extends Component {
                 <div className="row">
                     {menu} {/* this shows dish images with overlayed text*/}
                 </div>
-                <div> 
-                    <DishDetail detailDish={this.state.selectedDish} /> {/* saves selected dish to DishDetail props */}
-
-                    {/* {this.renderDish(this.state.selectedDish)} this shows in browser the image + description */}
-                </div>
+                <DishDetail detailDish={this.state.selectedDish} /> {/* saves selected dish to DishDetail props, will show image + description + comments when clicked*/}
             </div>
         );
     }

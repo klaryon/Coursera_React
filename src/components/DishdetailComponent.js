@@ -7,29 +7,13 @@ class DishDetail extends Component {
         super(props);
     }
 
-    // mapComment(comments) {
-    //     comments.map((phrase) => {
-    //         return (
-    //             <div key={phrase.id}>
-    //                 <ul className="list-unstyled">
-    //                     <li>{phrase.comment}</li>
-    //                     <li>-- {phrase.author} {phrase.date}</li>
-    //                 </ul>
-    //             </div>
-    //         )
-    //     })
-    // }
-
-    renderComments(comments) {
-
-        const mapComment = comments.map((phrase) => {
+    renderComments(comments) { /* we receive an array of objects */
+        const listComment = comments.map((phrase) => {
             return (
-                <div key={phrase.id}>
-                    <ul className="list-unstyled">
-                        <li>{phrase.comment}</li>
-                        <li>-- {phrase.author} {phrase.date}</li>
-                    </ul>
-                </div>
+                <ul className="list-unstyled" key={phrase.id}>
+                    <li>{phrase.comment}</li>
+                    <li>-- {phrase.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(phrase.date)))}</li>
+                </ul>
             );
         });
 
@@ -37,21 +21,8 @@ class DishDetail extends Component {
             return (
                 <div>
                     <h4>Comments</h4>
-                    {mapComment}
-                    {/* {this.mapComment(comments)} */}
-                    {/* <ul className="list-unstyled">
-                        <li>{comments[0].comment}</li>
-                        <li>-- {comments[0].author} {comments[0].date}</li>
-                        <li>{comments[1].comment}</li>
-                        <li>-- {comments[1].author} {comments[1].date}</li>
-                        <li>{comments[2].comment}</li>
-                        <li>-- {comments[2].author} {comments[2].date}</li>
-                        <li>{comments[3].comment}</li>
-                        <li>-- {comments[3].author} {comments[3].date}</li>
-                        <li>{comments[4].comment}</li>
-                        <li>-- {comments[4].author} {comments[4].date}</li>
-                    </ul> */}
-                </div>
+                    {listComment}
+                 </div>
             )
         } 
         else {
@@ -75,7 +46,7 @@ class DishDetail extends Component {
                         </Card>
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        {this.renderComments(dish.comments)} {/*  */}
+                        {this.renderComments(dish.comments)} {/* we select comments : array of objects */}
                       </div>
                 </div>
             );
@@ -88,11 +59,11 @@ class DishDetail extends Component {
     }
 
     render() {
-        const detail = this.props.detailDish;
+        const detail = this.props.detailDish; /* we receive props from Menu Component */
 
         return (
             <div>
-                {this.renderDish(detail)} {/* info dish props is passed to being rendered */}
+                {this.renderDish(detail)} {/* info dish props is returned to be rendered */}
             </div>
         );
     }
