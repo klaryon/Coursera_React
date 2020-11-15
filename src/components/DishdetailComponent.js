@@ -3,6 +3,14 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 class DishDetail extends Component {
 
+    componentDidMount() {
+        console.log('Dishdetail Component componentDidMount invoked');
+    }
+
+    componentDidUpdate() {
+        console.log('Dishdetail Component componentDidUpdate invoked');
+    }
+
     //when dish image is clicked, prints in browser all  selected dish and it's description
 
     renderComments(comments) { /* we receive an array of objects */
@@ -31,25 +39,39 @@ class DishDetail extends Component {
     }
 
     renderDish(dish) { 
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        <Card>
+                            <CardImg width="100%" src={dish.image} alt={dish.name}/>
+                            <CardBody>
+                                <CardTitle>{dish.name}</CardTitle>
+                                <CardText>{dish.description}</CardText>
+                            </CardBody>
+                        </Card>
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        {this.renderComments(dish.comments)} {/* we select comments : array of objects */}
+                    </div>
+                </div>
+            </div>
+
+        );
+    }
+
+    render() {
+        console.log('Dishdetail Component render invoked');
+
+        const dish = this.props.dish; /* we receive props from Menu Component */
+
         if(dish != null) { /* if there is a selected dish, then it will render */ 
             return (
                 <div className="container">
                     <div className="row">
-                        <div className="col-12 col-md-5 m-1">
-                            <Card>
-                                <CardImg width="100%" src={dish.image} alt={dish.name}/>
-                                <CardBody>
-                                    <CardTitle>{dish.name}</CardTitle>
-                                    <CardText>{dish.description}</CardText>
-                                </CardBody>
-                            </Card>
-                        </div>
-                        <div className="col-12 col-md-5 m-1">
-                            {this.renderComments(dish.comments)} {/* we select comments : array of objects */}
-                        </div>
+                        {this.renderDish(dish)} {/* info dish props is returned to be rendered */}
                     </div>
                 </div>
-
             );
         } 
         else {
@@ -57,19 +79,6 @@ class DishDetail extends Component {
                 <div></div>
             );
         }
-    }
-
-    render() {
-        const dish = this.props.dish; /* we receive props from Menu Component */
-
-        return (
-            <div className="container">
-                <div className="row">
-                    {this.renderDish(dish)} {/* info dish props is returned to be rendered */}
-                </div>
-            </div>
-
-        );
     }
 }
 
