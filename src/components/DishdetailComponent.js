@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 class DishDetail extends Component {
-    
-    constructor(props) {
-        super(props);
-    }
+
+    //when dish image is clicked, prints in browser all  selected dish and it's description
 
     renderComments(comments) { /* we receive an array of objects */
         const listComment = comments.map((phrase) => {
@@ -35,20 +33,23 @@ class DishDetail extends Component {
     renderDish(dish) { 
         if(dish != null) { /* if there is a selected dish, then it will render */ 
             return (
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                        <Card>
-                            <CardImg width="100%" src={dish.image} alt={dish.name}/>
-                            <CardBody>
-                                <CardTitle>{dish.name}</CardTitle>
-                                <CardText>{dish.description}</CardText>
-                            </CardBody>
-                        </Card>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 col-md-5 m-1">
+                            <Card>
+                                <CardImg width="100%" src={dish.image} alt={dish.name}/>
+                                <CardBody>
+                                    <CardTitle>{dish.name}</CardTitle>
+                                    <CardText>{dish.description}</CardText>
+                                </CardBody>
+                            </Card>
+                        </div>
+                        <div className="col-12 col-md-5 m-1">
+                            {this.renderComments(dish.comments)} {/* we select comments : array of objects */}
+                        </div>
                     </div>
-                    <div className="col-12 col-md-5 m-1">
-                        {this.renderComments(dish.comments)} {/* we select comments : array of objects */}
-                      </div>
                 </div>
+
             );
         } 
         else {
@@ -59,12 +60,15 @@ class DishDetail extends Component {
     }
 
     render() {
-        const detail = this.props.detailDish; /* we receive props from Menu Component */
+        const dish = this.props.dish; /* we receive props from Menu Component */
 
         return (
-            <div>
-                {this.renderDish(detail)} {/* info dish props is returned to be rendered */}
+            <div className="container">
+                <div className="row">
+                    {this.renderDish(dish)} {/* info dish props is returned to be rendered */}
+                </div>
             </div>
+
         );
     }
 }
