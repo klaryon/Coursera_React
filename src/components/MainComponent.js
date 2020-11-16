@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import Home from './HomeComponent';
 import Menu from './MenuComponent';
 import DishDetail from "./DishdetailComponent";
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { DISHES } from '../shared/dishes';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 class Main extends Component { /* Main becomes COMPONENT AS A CONTAINER */
 
@@ -12,21 +14,25 @@ class Main extends Component { /* Main becomes COMPONENT AS A CONTAINER */
 
     this.state = {
       dishes: DISHES,
-      selectedDish: null
     };
   }
 
-  onDishSelect(dishId) {
-    this.setState({selectedDish: dishId}); /* establishes that a dish was selected */ 
-}
-
   render() {
+
+    const HomePage = () => {
+      return(
+        <Home />
+      );
+    }
+
     return (
       <div>
         <Header />
-        <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} /> {/* if we make click on one image, a dish is added .onDishSelect  */}
-        <DishDetail 
-        dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish )[0]} /> {/* searches selected dish using filter by Id  */}
+        <Switch> {/* this enables to switch between different routes as if were nav links */}
+            <Route path="/home" component={HomePage} />
+            <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
+            <Redirect to="/home" />
+        </Switch>
         <Footer />
       </div>
     );
