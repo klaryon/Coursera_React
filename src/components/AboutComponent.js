@@ -2,34 +2,26 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-function RenderLeader({leader}) {
+function RenderLeader({leaders}){
     return (
-    <Media tag="li" className="mt-4">
-        <Media href="#" >
-            <Media object src={leader.image} alt={leader.name} />
-        </Media>
-        <Media body className="ml-5">
-            <Media heading>
-                {leader.name}
-            </Media>
-            <Media>
-                {leader.abbr}
-            </Media>
-            {leader.description}
-        </Media>
-    </Media>
-    );
+        leaders.map((leader) => {
+            return (
+                <Media tag="li" className="mt-3">
+                    <Media left middle>
+                        <Media object src={leader.image}></Media>
+                    </Media>
+                    <Media body className="ml-5">
+                        <Media heading>{leader.name}</Media>
+                        <p>{leader.designation}</p>
+                        <p>{leader.description}</p>
+                    </Media>
+                </Media>
+            );
+        })
+    )
 }
 
-const About = (props) => {
-    const about = props.leaders.map((leader) => {
-        return (
-            <div key={leader.id}>
-                <RenderLeader leader={leader} />
-            </div>
-        );
-    });
-
+function About(props) {
     return(
         <div className="container">
             <div className="row">
@@ -50,8 +42,7 @@ const About = (props) => {
                 </div>
                 <div className="col-12 col-md-5">
                     <Card>
-                        <CardHeader className="bg-primary text-white">Facts At a Glance
-                        </CardHeader>
+                        <CardHeader className="bg-primary text-white">Facts At a Glance</CardHeader>
                         <CardBody>
                             <dl className="row p-1">
                                 <dt className="col-6">Started</dt>
@@ -87,7 +78,7 @@ const About = (props) => {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        {about}
+                        < RenderLeader leaders={props.leaders} />
                     </Media>
                 </div>
             </div>
