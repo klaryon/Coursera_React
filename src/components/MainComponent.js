@@ -2,20 +2,22 @@ import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
+import About from './AboutComponent';
 import DishDetail from "./DishdetailComponent";
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { DISHES } from '../shared/dishes';
-import { COMMENTS} from '../shared/comments';
-import { PROMOTIONS} from '../shared/promotions';
+import { COMMENTS } from '../shared/comments';
+import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
 import { Switch, Route, Redirect } from 'react-router-dom';
+
 
 class Main extends Component { /* Main becomes COMPONENT AS A CONTAINER */
 
   constructor(props) {
     super(props);
-
+    
     this.state = {
       dishes: DISHES,
       comments: COMMENTS,
@@ -23,7 +25,7 @@ class Main extends Component { /* Main becomes COMPONENT AS A CONTAINER */
       leaders: LEADERS
     };
   }
-
+  
   render() {
 
     const HomePage = () => {
@@ -47,6 +49,7 @@ class Main extends Component { /* Main becomes COMPONENT AS A CONTAINER */
         <Header />
         <Switch> {/* this enables to switch between different routes as if were nav links */}
             <Route path="/home" component={HomePage} />
+            <Route path="/aboutus" component={ () => <About leaders={this.state.leaders} />} />
             <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
             <Route path="/menu/:dishId" component={DishWithId} />
             <Route exact path="/contactus" component={Contact} />
