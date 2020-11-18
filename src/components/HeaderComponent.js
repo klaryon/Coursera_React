@@ -10,7 +10,7 @@ class Header extends Component {
             isNavOpen: false
         };
         this.toggleNav = this.toggleNav.bind(this);
-    }
+    } //if there is a method in a class were a setState is defined, you must bind the method --> in this case toggleNav()
 
     toggleNav() {
         this.setState({
